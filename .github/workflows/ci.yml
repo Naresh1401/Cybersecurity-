@@ -20,6 +20,9 @@ jobs:
     uses: Naresh1401/github-cicd-workflows/.github/workflows/python-ci.yml@v1
     with:
       working-directory: Cybersecurity/backend
+      # tests/test_e2e.py is a script for a running API, not a pytest suite;
+      # exit code 5 means pytest found no other tests yet
+      test-command: python -m pytest --ignore=tests/test_e2e.py || test $? -eq 5
 
   node:
     name: Node
